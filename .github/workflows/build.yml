@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
       with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
     - name: Perform linting
@@ -30,7 +30,7 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
            fetch-depth: 0
            token: ${{ secrets.REPO_ACCESS_TOKEN }}
@@ -54,9 +54,9 @@ jobs:
           git checkout -b release/v${{ vars.MAJOR }}.${{ vars.MINOR }}
       -
         name: Setup Node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
-          node-version: 20
+          node-version: 24
       -
          name: Build
          run: |
@@ -100,6 +100,7 @@ jobs:
         name: Update major release
         uses: action-pack/github-release@v2
         with:
+          latest: false
           tag: "v${{ vars.MAJOR }}"
           title: "v${{ vars.MAJOR }}"
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
